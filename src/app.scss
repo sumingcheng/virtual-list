@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+}
+
+.scroll-wrapper {
+  height: 100vh;
+  overflow-y: auto;
+
+  .list-item {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    border-bottom: 1px solid #000;
+  }
+}
