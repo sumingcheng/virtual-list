@@ -1,3 +1,5 @@
+import { TIME_PER_FPS } from './config'
+
 export function getData(init, count) {
   const arr = []
 
@@ -6,4 +8,17 @@ export function getData(init, count) {
   }
 
   return arr
+}
+
+export function setAnimationFrame(cb) {
+  let beginTime = Date.now()
+
+  requestAnimationFrame(function rf() {
+    const endTime = Date.now()
+    cb()
+    if (endTime - beginTime >= TIME_PER_FPS) {
+      beginTime = endTime
+      requestAnimationFrame(rf)
+    }
+  })
 }
