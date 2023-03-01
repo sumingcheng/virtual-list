@@ -68,7 +68,8 @@ export function reactive(list) {
 }
 
 function setEndIndex() {
-  const endIndex = $state.startIndex + MAX_ITEM_COUNT
+  // 两屏优化
+  const endIndex = $state.startIndex + MAX_ITEM_COUNT * 2
   // 判断是否超出最大值，如果超出，dataSource.length就是最大值
   return $state.dataSource[endIndex] ? endIndex : $state.dataSource.length - 1
 }
@@ -81,12 +82,18 @@ export function setDataSource(init, count) {
 }
 
 export function setCurrentData() {
-  $state.currentData = $state.dataSource.slice($state.startIndex, $state.endIndex)
+  let StartIndex = resetStartIndex()
+  $state.currentData = $state.dataSource.slice(StartIndex, $state.endIndex)
 }
 
 export function setPaddingSet() {
+  let StartIndex = resetStartIndex()
   $state.paddingSet = {
-    paddingTop: $state.startIndex * ITEM_HEIGHT,
+    paddingTop: StartIndex * ITEM_HEIGHT,
     paddingBottom: ($state.dataSource.length - $state.endIndex) * ITEM_HEIGHT
   }
+}
+
+export function resetStartIndex() {
+  return $state.startIndex <= MAX_ITEM_COUNT ? 0 : $state.startIndex - MAX_ITEM_COUNT
 }

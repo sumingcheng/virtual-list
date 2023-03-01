@@ -2,6 +2,7 @@ import './app.scss'
 import { reactive, setCurrentData, setDataSource } from './reactive'
 import { render } from './render'
 import { ITEM_HEIGHT } from './config'
+import { setAnimationFrame } from './utils'
 
 (function () {
   const oScroller = document.querySelector('#J_ScrollWrapper')
@@ -24,7 +25,9 @@ import { ITEM_HEIGHT } from './config'
   }
 
   function handleScroll() {
-    $state.startIndex = Math.floor(this.scrollTop / ITEM_HEIGHT)
+    setAnimationFrame(() => {
+      $state.startIndex = Math.floor(this.scrollTop / ITEM_HEIGHT)
+    })
   }
 
   init()
