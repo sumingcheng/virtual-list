@@ -12,9 +12,11 @@ export function render(currentData, paddingSet, list) {
 }
 
 export function update(currentData, list) {
+  // 选出所有 item
   const oItems = list.querySelectorAll('.list-item')
-
+  // 替换 所有 item
   oItems.forEach((item, index) => {
+    // 插入新值
     item.innerText = currentData[index]
   })
 }
